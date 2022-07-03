@@ -1,4 +1,4 @@
-package ru.market_gb.gateway;
+package ru.market_gb.core;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
