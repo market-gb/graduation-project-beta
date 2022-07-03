@@ -87,7 +87,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ru.market_gb.core.CoreSpringWebApplication</mainClass>
+                            <mainClass>ru.market_gb.gateway.CoreSpringWebApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
