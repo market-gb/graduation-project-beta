@@ -92,9 +92,9 @@ public class ProductsController {
             }
     )
     @PostMapping
-    public void save(@RequestBody @Parameter(description = "Новый товар", required = true) @Valid ProductDto productDto,
+    public ProductDto save(@RequestBody @Parameter(description = "Новый товар", required = true) @Valid ProductDto productDto,
                      @Parameter(description = "Ошибки валидации", required = true) BindingResult bindingResult) {
-        productService.tryToSave(productDto, bindingResult);
+        return productConverter.entityToDto(productService.tryToSave(productDto, bindingResult));
     }
 
     @Operation(
@@ -111,9 +111,9 @@ public class ProductsController {
             }
     )
     @PutMapping
-    public void updateProduct(@RequestBody @Parameter(description = "Изменённый товар", required = true) @Valid ProductDto productDto,
+    public ProductDto update(@RequestBody @Parameter(description = "Изменённый товар", required = true) @Valid ProductDto productDto,
                                            @Parameter(description = "Ошибки валидации", required = true) BindingResult bindingResult) {
-        productService.tryToSave(productDto, bindingResult);
+        return productConverter.entityToDto(productService.tryToSave(productDto, bindingResult));
     }
 
     @Operation(

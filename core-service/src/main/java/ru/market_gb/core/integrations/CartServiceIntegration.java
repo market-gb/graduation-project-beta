@@ -27,10 +27,7 @@ public class CartServiceIntegration {
 
 
     public void clearUserCart(String username) {
-        cartServiceWebClient.get()
-                .uri(clearUserCartUri)
-                .header("username", username)
-                .retrieve()
+        getOnStatus(clearUserCartUri, username)
                 .toBodilessEntity()
                 .block();
     }
@@ -39,8 +36,18 @@ public class CartServiceIntegration {
         if (identityMap.containsKey(username)) {
             return identityMap.get(username);
         }
-        CartDto cartDto = cartServiceWebClient.get()
-                .uri(getUserCartUri)
+        CartDto cartDto = getOnStatus(getUserCartUri, username)
+                .bodyToMono(CartDto.class)
+                .block();
+        if (cartDto != null){
+            identityMap.put(username, cartDto);
+        }
+        return cartDto;
+    }
+
+    private WebClient.ResponseSpec getOnStatus(String uri, String username) {
+        return cartServiceWebClient.get()
+                .uri(uri)
                 .header("username", username)
                 .retrieve()
                 .onStatus(
@@ -51,7 +58,7 @@ public class CartServiceIntegration {
                                         log.error("Выполнен некорректный запрос к сервису корзин: корзина не найдена");
                                         return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина не найдена");
                                     }
-                                    if (body.getCode().equals(ServiceAppError.ServiceErrors.CART_IS_BROKEN)) {
+                                    if (body.getCode().equals(ServiceAppError.ServiceErrors.CART_SERVICE_IS_BROKEN)) {
                                         log.error("Выполнен некорректный запрос к сервису корзин: корзина сломана");
                                         return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина сломана");
                                     }
@@ -59,13 +66,7 @@ public class CartServiceIntegration {
                                     return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: причина неизвестна");
                                 }
                         )
-                )
-                .bodyToMono(CartDto.class)
-                .block();
-        if (cartDto != null){
-            identityMap.put(username, cartDto);
-        }
-        return cartDto;
+                );
     }
 
     @Scheduled(cron = "${utils.identity-map.clear-cron}")

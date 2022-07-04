@@ -15,7 +15,7 @@ public class ServiceAppError {
 
     public enum ServiceErrors {
         PRODUCT_NOT_FOUND, CORE_SERVICE_IS_BROKEN, VALIDATION_ERRORS, INVALID_PARAMS,
-        CART_NOT_FOUND, CART_IS_BROKEN
+        CART_NOT_FOUND, CART_SERVICE_IS_BROKEN
     }
 
     public ServiceAppError(Enum<?> code, String message) {

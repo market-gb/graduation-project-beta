@@ -7,6 +7,7 @@ import ru.market_gb.core.dto.CartDto;
 import ru.market_gb.core.dto.OrderDetailsDto;
 import ru.market_gb.core.entities.Order;
 import ru.market_gb.core.entities.OrderItem;
+import ru.market_gb.core.exceptions.CoreValidationException;
 import ru.market_gb.core.exceptions.InvalidParamsException;
 import ru.market_gb.core.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.integrations.CartServiceIntegration;
@@ -44,7 +45,7 @@ public class OrderService {
                     item.setPricePerProduct(o.getPricePerProduct());
                     item.setPrice(o.getPrice());
                     item.setProduct(productsService.findById(o.getProductId())
-                            .orElseThrow(() -> new ResourceNotFoundException("Product not found")));
+                            .orElseThrow(() -> new ResourceNotFoundException("Товар не найден")));
                     return item;
                 }).collect(Collectors.toSet());
         order.setItems(items);
@@ -58,6 +59,9 @@ public class OrderService {
     }
 
     public List<Order> findAllByUsername(String username) {
+        if (username == null){
+            throw new InvalidParamsException("Невалидные параметры");
+        }
         return ordersRepository.findAllByUsername(username);
     }
 
@@ -68,7 +72,7 @@ public class OrderService {
         return ordersRepository.findById(id);
     }
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         if (id == null) {
             throw new InvalidParamsException("Невалидный параметр идентификатор:" + null);
         }
@@ -79,7 +83,10 @@ public class OrderService {
         }
     }
 
-    public void changeOrderStatus(Order.OrderStatus orderStatus, Long id) {
+    public void changeStatus(Order.OrderStatus orderStatus, Long id) {
+        if (orderStatus == null || id == null){
+            throw new InvalidParamsException("Невалидные параметры");
+        }
         try {
             ordersRepository.changeStatus(orderStatus, id);
         } catch (Exception ex) {

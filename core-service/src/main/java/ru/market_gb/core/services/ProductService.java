@@ -62,7 +62,7 @@ public class ProductService {
         }
     }
 
-    public void tryToSave(ProductDto productDto, BindingResult bindingResult) {
+    public Product tryToSave(ProductDto productDto, BindingResult bindingResult) {
         if (productDto == null) {
             throw new InvalidParamsException("Невалидный параметр 'productDto':" + null);
         }
@@ -70,17 +70,17 @@ public class ProductService {
             List<ObjectError> errors = bindingResult.getAllErrors();
             throw new CoreValidationException("Ошибка валидации", errors);
         }
-        save(productConverter.dtoToEntity(productDto));
+        return save(productConverter.dtoToEntity(productDto));
     }
 
-    private void save(Product product) {
+    private Product save(Product product) {
         if (product == null) {
             throw new InvalidParamsException("Невалидный параметр 'product':" + null);
         }
         if (isTitlePresent(product.getTitle())) {
             throw new InvalidParamsException("Товар с таким наименованием уже существует:" + product.getTitle());
         }
-        productsRepository.save(product);
+        return productsRepository.save(product);
     }
 
     private Boolean isTitlePresent(String title) {

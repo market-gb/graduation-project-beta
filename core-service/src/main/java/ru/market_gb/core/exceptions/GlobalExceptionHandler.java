@@ -22,4 +22,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ServiceAppError> catchValidationException(CoreValidationException e) {
         return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.VALIDATION_ERRORS, e.getMessage(), e.getErrors()), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ServiceAppError> catchCartServiceIntegrationException(CartServiceIntegrationException e) {
+        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.CART_SERVICE_IS_BROKEN, e.getMessage()), HttpStatus.NOT_FOUND);
+    }
 }
