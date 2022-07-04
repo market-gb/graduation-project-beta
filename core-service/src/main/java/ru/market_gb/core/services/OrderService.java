@@ -79,6 +79,7 @@ public class OrderService {
         }
     }
 
+    @Transactional
     public void changeStatus(Order.OrderStatus orderStatus, Long id) {
         if (orderStatus == null || id == null){
             throw new InvalidParamsException("Невалидные параметры");

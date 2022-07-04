@@ -14,6 +14,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findAllByUsername(String username);
 
     @Modifying
-    @Query("update Order o set o.orderStatus = ?1 where o.id = ?2")
+    @Query("update Order o set o.orderStatus = ?1, o.updatedAt = CURRENT_TIMESTAMP where o.id = ?2")
     void changeStatus(Order.OrderStatus orderStatus, Long orderId);
 }

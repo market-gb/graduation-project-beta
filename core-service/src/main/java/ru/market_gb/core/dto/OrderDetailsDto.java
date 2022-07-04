@@ -1,14 +1,13 @@
 package ru.market_gb.core.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Data
+@Getter
+@Setter
 @Schema(description = "Модель деталей заказа")
 public class OrderDetailsDto {
     @Schema(description = "Адрес заказа", required = true, example = "603000, г. Москва, ул. Прямая, д.10, кв.1")

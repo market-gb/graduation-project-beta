@@ -1,8 +1,6 @@
 package ru.market_gb.core.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,7 +10,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "order_items")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderItem {
