@@ -25,24 +25,24 @@ create table products_categories
 );
 
 insert into products (title, price)
-values ('Product#1', 500),
-       ('Product#2', 200),
-       ('Product#3', 400),
-       ('Product#4', 600),
-       ('Product#5', 900),
-       ('Product#6', 350),
-       ('Product#7', 650),
-       ('Product#8', 800),
-       ('Product#9', 1000),
-       ('Product#10', 430),
-       ('Product#11', 320);
+values ('Товар#1', 500),
+       ('Товар#2', 200),
+       ('Товар#3', 400),
+       ('Товар#4', 600),
+       ('Товар#5', 900),
+       ('Товар#6', 350),
+       ('Товар#7', 650),
+       ('Товар#8', 800),
+       ('Товар#9', 1000),
+       ('Товар#10', 430),
+       ('Товар#11', 320);
 
 insert into categories (title)
-values ('Category#1'),
-       ('Category#2'),
-       ('Category#3'),
-       ('Category#4'),
-       ('Category#5');
+values ('Категория#1'),
+       ('Категория#2'),
+       ('Категория#3'),
+       ('Категория#4'),
+       ('Категория#5');
 
 insert into products_categories (product_id, category_id)
 values (1, 1),

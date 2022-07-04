@@ -11,19 +11,20 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "Модель продукта")
+@Schema(description = "Модель товара")
 public class ProductDto {
-    @Schema(description = "ID продукта", required = true, example = "1")
+    @Schema(description = "Идентификатор товара", required = true, example = "1")
     private Long id;
-    @NotBlank(message = "Поле названия продукта не должно быть пустым")
-    @Size(min = 5, message = "Название продукта должно быть не короче 5 символов")
-    @Schema(description = "Название продукта", required = true, maxLength = 255, minLength = 3, example = "Product#1")
+    @NotBlank(message = "Поле названия товара не должно быть пустым")
+    @Size(min = 5, message = "Название товара должно быть не короче 5 символов")
+    @Schema(description = "Название товара", required = true, maxLength = 255, minLength = 3, example = "Товар#1")
     private String title;
-    @NotNull(message = "Поле цены продукта не должно быть пустым")
+    @NotNull(message = "Поле цены товара не должно быть пустым")
     @DecimalMin(value = "0.0", inclusive = false)
     @Digits(integer=10, fraction=2)
-    @Schema(description = "Цена продукта", required = true, example = "500.00")
+    @Schema(description = "Цена товара", required = true, example = "500.00")
     private BigDecimal price;
-    @Schema(description = "Категории продукта", required = true, example = "{Category#1, Category#2}")
+    @NotNull(message = "Должна быть указана хотя бы одна категория")
+    @Schema(description = "Категории товара", required = true, example = "{Категория#1, Категория#2}")
     private Set<CategoryDto> categories;
 }

@@ -12,11 +12,11 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Schema(description = "Модель элемента заказа")
 public class OrderItemDto {
-    @Schema(description = "ID элемента заказа", required = true, example = "1")
+    @Schema(description = "Идентификатор элемента заказа", required = true, example = "1")
     private Long productId;
-    @Schema(description = "Название продукта", required = true, example = "Product#1")
+    @Schema(description = "Название товара", required = true, example = "Товар#1")
     private String productTitle;
-    @Schema(description = "Количество продуктов", required = true, example = "3")
+    @Schema(description = "Количество товаров", required = true, example = "3")
     private int quantity;
     @Schema(description = "Цена за еденицу", required = true, example = "500.00")
     private BigDecimal pricePerProduct;
@@ -26,6 +26,6 @@ public class OrderItemDto {
     @Override
     public String toString() {
         return productTitle +
-                " - " + quantity+ " pcs";
+                " - " + quantity+ " шт.";
     }
 }

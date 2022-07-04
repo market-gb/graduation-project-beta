@@ -14,11 +14,11 @@ import java.util.Set;
 @NoArgsConstructor
 @Schema(description = "Модель заказа")
 public class OrderDto {
-    @Schema(description = "ID заказа", required = true, example = "1")
+    @Schema(description = "Идентификатор заказа", required = true, example = "1")
     private Long id;
     @Schema(description = "Имя получателя", required = true, example = "Иванов Иван Иванович")
     private String username;
-    @Schema(description = "Список покупок", required = true, example = "{Product#1 - 4 pcs, Product#2 - 3 pcs}")
+    @Schema(description = "Список покупок", required = true, example = "{Товар#1 - 4 шт., Товар#2 - 3 шт.}")
     private Set<OrderItemDto> items;
     @Schema(description = "Стоимость заказа", required = true, example = "1000.00")
     private BigDecimal totalPrice;

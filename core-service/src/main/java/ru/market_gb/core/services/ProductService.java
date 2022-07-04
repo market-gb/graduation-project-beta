@@ -6,17 +6,25 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import ru.market_gb.core.converters.ProductConverter;
+import ru.market_gb.core.dto.ProductDto;
 import ru.market_gb.core.entities.Product;
+import ru.market_gb.core.exceptions.CoreValidationException;
+import ru.market_gb.core.exceptions.InvalidParamsException;
 import ru.market_gb.core.repositories.ProductRepository;
 import ru.market_gb.core.repositories.specifications.ProductsSpecifications;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProductsService {
+public class ProductService {
     private final ProductRepository productsRepository;
+    private final ProductConverter productConverter;
 
     public Page<Product> findAll(Integer minPrice, Integer maxPrice, String partTitle, String categoryTitle, Integer page) {
         Specification<Product> spec = Specification.where(null);
@@ -44,22 +52,33 @@ public class ProductsService {
 
     public void deleteById(Long id) {
         if (id == null) {
-            return;
+            throw new InvalidParamsException("Невалидный параметр идентификатор:" + null);
         }
         productsRepository.deleteById(id);
     }
 
-    public void save(Product product) {
-        if (product == null) {
-            return;
+    public void tryToSave(ProductDto productDto, BindingResult bindingResult) {
+        if (productDto == null) {
+            throw new InvalidParamsException("Невалидный параметр 'productDto':" + null);
         }
-        if (isTitleOfProductPresent(product.getTitle())) {
-            return;
+        if (bindingResult.hasErrors()) {
+            List<ObjectError> errors = bindingResult.getAllErrors();
+            throw new CoreValidationException("Ошибка валидации", errors);
+        }
+        save(productConverter.dtoToEntity(productDto));
+    }
+
+    private void save(Product product) {
+        if (product == null) {
+            throw new InvalidParamsException("Невалидный параметр 'productDto':" + null);
+        }
+        if (isTitlePresent(product.getTitle())) {
+            throw new InvalidParamsException("Товар с таким наименованием уже существует:" + product.getTitle());
         }
         productsRepository.save(product);
     }
 
-    private Boolean isTitleOfProductPresent(String title) {
+    private Boolean isTitlePresent(String title) {
         return productsRepository.countByTitle(title) > 0;
     }
 }
