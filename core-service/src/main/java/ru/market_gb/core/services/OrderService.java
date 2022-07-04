@@ -54,10 +54,6 @@ public class OrderService {
         return order;
     }
 
-    public boolean isStatusPresent(Order.OrderStatus orderStatus, Long orderId) {
-        return ordersRepository.countByStatusAndId(orderStatus, orderId) > 0;
-    }
-
     public List<Order> findAllByUsername(String username) {
         if (username == null){
             throw new InvalidParamsException("Невалидные параметры");

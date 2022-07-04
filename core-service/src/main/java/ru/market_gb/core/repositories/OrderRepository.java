@@ -13,9 +13,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("select o from Order o where o.username = ?1")
     List<Order> findAllByUsername(String username);
 
-    @Query("select count(o) from Order o where o.orderStatus = ?1 and o.id = ?2")
-    Long countByStatusAndId(Order.OrderStatus orderStatus, Long orderId);
-
     @Modifying
     @Query("update Order o set o.orderStatus = ?1 where o.id = ?2")
     void changeStatus(Order.OrderStatus orderStatus, Long orderId);
