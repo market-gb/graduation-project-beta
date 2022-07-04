@@ -77,7 +77,7 @@ public class ProductService {
         if (product == null) {
             throw new InvalidParamsException("Невалидный параметр 'product':" + null);
         }
-        if (isTitlePresent(product.getTitle())) {
+        if (product.getId() == null && isTitlePresent(product.getTitle())) {
             throw new InvalidParamsException("Товар с таким наименованием уже существует:" + product.getTitle());
         }
         return productsRepository.save(product);
