@@ -13,6 +13,7 @@ import ru.market_gb.core.dto.ProductDto;
 import ru.market_gb.core.entities.Product;
 import ru.market_gb.core.exceptions.CoreValidationException;
 import ru.market_gb.core.exceptions.InvalidParamsException;
+import ru.market_gb.core.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.repositories.ProductRepository;
 import ru.market_gb.core.repositories.specifications.ProductsSpecifications;
 
@@ -54,7 +55,11 @@ public class ProductService {
         if (id == null) {
             throw new InvalidParamsException("Невалидный параметр идентификатор:" + null);
         }
-        productsRepository.deleteById(id);
+        try {
+            productsRepository.deleteById(id);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("Ошибка удаления товара. Товар " + id + "не существует");
+        }
     }
 
     public void tryToSave(ProductDto productDto, BindingResult bindingResult) {
@@ -70,7 +75,7 @@ public class ProductService {
 
     private void save(Product product) {
         if (product == null) {
-            throw new InvalidParamsException("Невалидный параметр 'productDto':" + null);
+            throw new InvalidParamsException("Невалидный параметр 'product':" + null);
         }
         if (isTitlePresent(product.getTitle())) {
             throw new InvalidParamsException("Товар с таким наименованием уже существует:" + product.getTitle());

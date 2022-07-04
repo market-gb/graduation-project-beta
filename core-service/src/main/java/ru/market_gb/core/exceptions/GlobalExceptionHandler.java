@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<CoreServiceAppError> catchResourceNotFoundException(ResourceNotFoundException e) {
-        return new ResponseEntity<>(new CoreServiceAppError(CoreServiceAppError.CoreServiceErrors.PRODUCT_NOT_FOUND, e.getMessage()), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ServiceAppError> catchResourceNotFoundException(ResourceNotFoundException e) {
+        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.PRODUCT_NOT_FOUND, e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    public ResponseEntity<CoreServiceAppError> catchInvalidParamsException(InvalidParamsException e) {
-        return new ResponseEntity<>(new CoreServiceAppError(CoreServiceAppError.CoreServiceErrors.INVALID_PARAMS, e.getMessage()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ServiceAppError> catchInvalidParamsException(InvalidParamsException e) {
+        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.INVALID_PARAMS, e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public ResponseEntity<CoreServiceAppError> catchValidationException(CoreValidationException e) {
-        return new ResponseEntity<>(new CoreServiceAppError(CoreServiceAppError.CoreServiceErrors.VALIDATION_ERRORS, e.getMessage(), e.getErrors()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ServiceAppError> catchValidationException(CoreValidationException e) {
+        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.VALIDATION_ERRORS, e.getMessage(), e.getErrors()), HttpStatus.BAD_REQUEST);
     }
 }

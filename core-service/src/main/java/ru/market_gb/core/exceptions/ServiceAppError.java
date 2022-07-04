@@ -8,16 +8,17 @@ import java.util.List;
 
 @Getter
 @AllArgsConstructor
-public class CoreServiceAppError {
+public class ServiceAppError {
     private final Enum<?> code;
     private final String message;
     private List<ObjectError> errors;
 
-    public enum CoreServiceErrors {
-        PRODUCT_NOT_FOUND, CORE_SERVICE_IS_BROKEN, VALIDATION_ERRORS, INVALID_PARAMS
+    public enum ServiceErrors {
+        PRODUCT_NOT_FOUND, CORE_SERVICE_IS_BROKEN, VALIDATION_ERRORS, INVALID_PARAMS,
+        CART_NOT_FOUND, CART_IS_BROKEN
     }
 
-    public CoreServiceAppError(Enum<?> code, String message) {
+    public ServiceAppError(Enum<?> code, String message) {
         this.code = code;
         this.message = message;
     }

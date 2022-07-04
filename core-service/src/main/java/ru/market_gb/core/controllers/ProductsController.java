@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.market_gb.core.converters.ProductConverter;
 import ru.market_gb.core.dto.ProductDto;
 import ru.market_gb.core.entities.Product;
-import ru.market_gb.core.exceptions.CoreServiceAppError;
+import ru.market_gb.core.exceptions.ServiceAppError;
 import ru.market_gb.core.exceptions.InvalidParamsException;
 import ru.market_gb.core.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.services.ProductService;
@@ -37,7 +37,7 @@ public class ProductsController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "400",
-                            content = @Content(schema = @Schema(implementation = CoreServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
                     )
             }
     )
@@ -67,7 +67,7 @@ public class ProductsController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "404",
-                            content = @Content(schema = @Schema(implementation = CoreServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
                     )
             }
     )
@@ -87,7 +87,7 @@ public class ProductsController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "400",
-                            content = @Content(schema = @Schema(implementation = CoreServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
                     )
             }
     )
@@ -106,7 +106,7 @@ public class ProductsController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "400",
-                            content = @Content(schema = @Schema(implementation = CoreServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
                     )
             }
     )
@@ -124,7 +124,7 @@ public class ProductsController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "400",
-                            content = @Content(schema = @Schema(implementation = CoreServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
                     )
             }
     )
