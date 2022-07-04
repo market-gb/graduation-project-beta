@@ -1,12 +1,15 @@
 package ru.market_gb.core.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Schema(description = "Модель корзины")
 public class CartDto {
     @Schema(description = "Элементы корзины", required = true, example = "{1, Товар№1, 4, 500.00, 1500.00}")
