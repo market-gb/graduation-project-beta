@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import ru.market_gb.core.entities.Order;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +19,7 @@ public class OrderDto {
     @Schema(description = "Имя получателя", required = true, example = "Иванов Иван Иванович")
     private String username;
     @Schema(description = "Список покупок", required = true, example = "{Product#1 - 4 pcs, Product#2 - 3 pcs}")
-    private List<OrderItemDto> items;
+    private Set<OrderItemDto> items;
     @Schema(description = "Стоимость заказа", required = true, example = "1000.00")
     private BigDecimal totalPrice;
     @Schema(description = "Адрес доставки", required = true, example = "603000, г. Москва, ул. Прямая, д.10, кв.1")
