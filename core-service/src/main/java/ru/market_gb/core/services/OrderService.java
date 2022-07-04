@@ -38,13 +38,13 @@ public class OrderService {
         order.setTotalPrice(currentCart.getTotalPrice());
         order.setOrderStatus(Order.OrderStatus.CREATED);
         Set<OrderItem> items = currentCart.getItems().stream()
-                .map(o -> {
+                .map(i -> {
                     OrderItem item = new OrderItem();
                     item.setOrder(order);
-                    item.setQuantity(o.getQuantity());
-                    item.setPricePerProduct(o.getPricePerProduct());
-                    item.setPrice(o.getPrice());
-                    item.setProduct(productsService.findById(o.getProductId())
+                    item.setQuantity(i.getQuantity());
+                    item.setPricePerProduct(i.getPricePerProduct());
+                    item.setPrice(i.getPrice());
+                    item.setProduct(productsService.findById(i.getProductId())
                             .orElseThrow(() -> new ResourceNotFoundException("Товар не найден")));
                     return item;
                 }).collect(Collectors.toSet());
