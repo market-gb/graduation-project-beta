@@ -1,7 +1,7 @@
 create table products
 (
     id         bigserial primary key,
-    title      varchar(255)  not null,
+    title      varchar(255)  not null unique ,
     price      numeric(8, 2) not null,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
@@ -10,7 +10,7 @@ create table products
 create table categories
 (
     id         bigserial primary key,
-    title      varchar(255) not null,
+    title      varchar(255) not null unique,
     created_at timestamp default current_timestamp,
     updated_at timestamp default current_timestamp
 );
@@ -69,7 +69,7 @@ create table orders
     total_price  numeric(8, 2) not null,
     address      varchar(255),
     phone        varchar(255),
-    order_status varchar(20)   not null,
+    order_status varchar(20)   not null default 'CREATED',
     created_at   timestamp default current_timestamp,
     updated_at   timestamp default current_timestamp
 );
