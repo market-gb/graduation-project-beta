@@ -21,7 +21,7 @@ public class CategoryConverter {
         return new Category(categoryDto.getId(), categoryDto.getTitle());
     }
 
-    public CategoryDto entityToDto(Category category) {
+    private CategoryDto entityToDto(Category category) {
         return new CategoryDto(category.getId(), category.getTitle());
     }
 }
