@@ -49,7 +49,6 @@ public class OrderServiceTest {
     private static CartDto cartDto;
     private static Product product;
     private static Order order;
-    private static Optional<Order> optionalOrder;
     private static List<Order> orderList;
 
     @BeforeAll
@@ -90,7 +89,6 @@ public class OrderServiceTest {
                 }).collect(Collectors.toSet());
         order.setItems(items);
         orderList = List.of(order);
-        optionalOrder = Optional.of(order);
     }
 
     @Test
@@ -121,7 +119,7 @@ public class OrderServiceTest {
 
     @Test
     public void findByIdTest(){
-        Mockito.doReturn(optionalOrder).when(ordersRepository).findById(1L);
+        Mockito.doReturn(Optional.of(order)).when(ordersRepository).findById(1L);
         Order currentOrder = ordersService.findById(1L).orElse(new Order());
         Assertions.assertEquals(1, currentOrder.getId());
         Assertions.assertEquals(Order.OrderStatus.CREATED, currentOrder.getOrderStatus());

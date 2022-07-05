@@ -12,18 +12,15 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.BindingResultUtils;
 import ru.market_gb.core.converters.ProductConverter;
 import ru.market_gb.core.dto.CategoryDto;
 import ru.market_gb.core.dto.ProductDto;
 import ru.market_gb.core.entities.Category;
 import ru.market_gb.core.entities.Product;
 import ru.market_gb.core.repositories.ProductRepository;
-import ru.market_gb.core.services.OrderService;
 import ru.market_gb.core.services.ProductService;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -38,18 +35,11 @@ public class ProductServiceTest {
     private BindingResult bindingResult;
     @MockBean
     private ProductConverter productConverter;
-    private final static String USERNAME = "test_username";
-    private final static String ADDRESS = "test_address";
-    private final static String PHONE = "test_phone";
     private final static String CATEGORY_TITLE = "test_category_title";
     private final static String TITLE = "Milk";
-    private static final BigDecimal PRICE_PER_PRODUCT = BigDecimal.valueOf(100);
     private final static BigDecimal PRICE = BigDecimal.valueOf(100);
-    private static final BigDecimal TOTAL_PRICE = BigDecimal.valueOf(100);
-    private final static Integer QUANTITY = 1;
     private static Product product;
     private static ProductDto productDto;
-    private static Optional<Product> optionalProduct;
     private static Page<Product> productPage;
 
     @BeforeAll
@@ -64,7 +54,6 @@ public class ProductServiceTest {
         productDto.setTitle(TITLE);
         productDto.setPrice(PRICE);
         productDto.setCategories(Set.of(new CategoryDto(1L, CATEGORY_TITLE)));
-        optionalProduct = Optional.of(product);
         productPage = new PageImpl<>(List.of(product));
     }
 
@@ -83,7 +72,7 @@ public class ProductServiceTest {
 
     @Test
     public void findByIdTest() {
-        Mockito.doReturn(optionalProduct).when(productRepository).findById(1L);
+        Mockito.doReturn(Optional.of(product)).when(productRepository).findById(1L);
         Product newProduct = productService.findById(1L).orElse(new Product());
         Assertions.assertEquals(1L, newProduct.getId());
         Assertions.assertEquals(TITLE, newProduct.getTitle());
