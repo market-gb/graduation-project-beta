@@ -39,7 +39,6 @@ public class OrderRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void changeOrderStatusTest() {
         orderRepository.changeStatus(Order.OrderStatus.PAID, 1L);
         Order order = orderRepository.findById(1L).orElse(new Order());
