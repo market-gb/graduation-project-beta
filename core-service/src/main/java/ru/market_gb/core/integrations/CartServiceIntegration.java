@@ -4,15 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import ru.market_gb.core.dto.CartDto;
 import ru.market_gb.core.exceptions.CartServiceIntegrationException;
 import ru.market_gb.core.exceptions.ServiceAppError;
-
-import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Component
@@ -23,8 +19,6 @@ public class CartServiceIntegration {
     @Value("${cartServiceIntegration.getUserCartUri}")
     private String getUserCartUri;
     private final WebClient cartServiceWebClient;
-    private final ConcurrentHashMap<String, CartDto> identityMap = new ConcurrentHashMap<>();
-
 
     public void clearUserCart(String username) {
         getOnStatus(clearUserCartUri, username)
@@ -33,16 +27,9 @@ public class CartServiceIntegration {
     }
 
     public CartDto getUserCart(String username) {
-        if (identityMap.containsKey(username)) {
-            return identityMap.get(username);
-        }
-        CartDto cartDto = getOnStatus(getUserCartUri, username)
+        return getOnStatus(getUserCartUri, username)
                 .bodyToMono(CartDto.class)
                 .block();
-        if (cartDto != null){
-            identityMap.put(username, cartDto);
-        }
-        return cartDto;
     }
 
     private WebClient.ResponseSpec getOnStatus(String uri, String username) {
@@ -67,11 +54,5 @@ public class CartServiceIntegration {
                                 }
                         )
                 );
-    }
-
-    @Scheduled(cron = "${utils.identity-map.clear-cron}")
-    @Async
-    public void clearIdentityMap() {
-      identityMap.clear();
     }
 }
