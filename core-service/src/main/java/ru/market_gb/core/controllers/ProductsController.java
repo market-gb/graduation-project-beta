@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.market_gb.core.converters.ProductConverter;
@@ -92,8 +93,9 @@ public class ProductsController {
             }
     )
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ProductDto save(@RequestBody @Parameter(description = "Новый товар", required = true) @Valid ProductDto productDto,
-                     @Parameter(description = "Ошибки валидации", required = true) BindingResult bindingResult) {
+                           @Parameter(description = "Ошибки валидации", required = true) BindingResult bindingResult) {
         return productConverter.entityToDto(productService.tryToSave(productDto, bindingResult));
     }
 
@@ -101,7 +103,7 @@ public class ProductsController {
             summary = "Изменение товара",
             responses = {
                     @ApiResponse(
-                            description = "Успешный ответ", responseCode = "200",
+                            description = "Успешный ответ", responseCode = "201",
                             content = @Content(schema = @Schema(implementation = ProductDto.class))
                     ),
                     @ApiResponse(
@@ -112,7 +114,7 @@ public class ProductsController {
     )
     @PutMapping
     public ProductDto update(@RequestBody @Parameter(description = "Изменённый товар", required = true) @Valid ProductDto productDto,
-                                           @Parameter(description = "Ошибки валидации", required = true) BindingResult bindingResult) {
+                             @Parameter(description = "Ошибки валидации", required = true) BindingResult bindingResult) {
         return productConverter.entityToDto(productService.tryToSave(productDto, bindingResult));
     }
 
