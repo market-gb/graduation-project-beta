@@ -40,13 +40,13 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void findAllTest(){
+    public void findAllTest() {
         List<Product> products = productRepository.findAll();
         Assertions.assertEquals(3, products.size());
     }
 
     @Test
-    public void findByIdTest(){
+    public void findByIdTest() {
         Product product = productRepository.findById(currentId).orElse(new Product());
         Assertions.assertEquals(TITLE, product.getTitle());
     }

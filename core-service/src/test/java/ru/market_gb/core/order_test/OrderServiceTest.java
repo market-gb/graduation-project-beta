@@ -43,7 +43,7 @@ public class OrderServiceTest {
     private static final BigDecimal PRICE_PER_PRODUCT = BigDecimal.valueOf(100);
     private final static BigDecimal PRICE = BigDecimal.valueOf(100);
     private static final BigDecimal TOTAL_PRICE = BigDecimal.valueOf(100);
-    private final static Integer QUANTITY  = 1;
+    private final static Integer QUANTITY = 1;
     private static OrderDetailsDto orderDetailsDto;
     private static CartItemDto cartItemDto;
     private static CartDto cartDto;
@@ -56,20 +56,24 @@ public class OrderServiceTest {
         orderDetailsDto = new OrderDetailsDto();
         orderDetailsDto.setAddress(ADDRESS);
         orderDetailsDto.setPhone(PHONE);
+
         cartItemDto = new CartItemDto();
         cartItemDto.setProductId(1L);
         cartItemDto.setProductTitle(TITLE);
         cartItemDto.setPrice(PRICE);
         cartItemDto.setQuantity(QUANTITY);
         cartItemDto.setPricePerProduct(PRICE_PER_PRODUCT);
+
         cartDto = new CartDto();
         cartDto.setTotalPrice(TOTAL_PRICE);
         cartDto.setItems(List.of(cartItemDto));
+
         product = new Product();
         product.setId(cartItemDto.getProductId());
         product.setTitle(cartItemDto.getProductTitle());
         product.setPrice(cartItemDto.getPricePerProduct());
         product.setCategories(Set.of(new Category(1L, CATEGORY_TITLE)));
+
         order = new Order();
         order.setId(1L);
         order.setAddress(orderDetailsDto.getAddress());
@@ -105,7 +109,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void findAllByUsernameTest(){
+    public void findAllByUsernameTest() {
         Mockito.doReturn(orderList).when(ordersRepository).findAllByUsername(USERNAME);
         List<Order> orders = ordersService.findAllByUsername(USERNAME);
         Assertions.assertEquals(1, orders.size());
@@ -118,7 +122,7 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void findByIdTest(){
+    public void findByIdTest() {
         Mockito.doReturn(Optional.of(order)).when(ordersRepository).findById(1L);
         Order currentOrder = ordersService.findById(1L).orElse(new Order());
         Assertions.assertEquals(1, currentOrder.getId());
@@ -132,13 +136,13 @@ public class OrderServiceTest {
     }
 
     @Test
-    public void deleteByIdTest(){
+    public void deleteByIdTest() {
         ordersService.deleteById(1L);
         Mockito.verify(ordersRepository, Mockito.times(1)).deleteById(1L);
     }
 
     @Test
-    public void changeStatusTest(){
+    public void changeStatusTest() {
         ordersService.changeStatus(Order.OrderStatus.PAID, 1L);
         Mockito.verify(ordersRepository, Mockito.times(1)).changeStatus(Order.OrderStatus.PAID, 1L);
     }

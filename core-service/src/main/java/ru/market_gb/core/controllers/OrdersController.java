@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -46,6 +47,7 @@ public class OrdersController {
             }
     )
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public OrderDto save(@RequestHeader @Parameter(description = "Имя пользователя", required = true) String username, @RequestBody @Valid @Parameter(description = "Детали заказа", required = true) OrderDetailsDto orderDetailsDto,
                                          BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
