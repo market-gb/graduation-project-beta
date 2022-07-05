@@ -8,27 +8,20 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import ru.market_gb.core.converters.OrderConverter;
 import ru.market_gb.core.dto.OrderDetailsDto;
 import ru.market_gb.core.dto.OrderDto;
-import ru.market_gb.core.dto.ProductDto;
 import ru.market_gb.core.entities.Order;
 import ru.market_gb.core.exceptions.CoreValidationException;
-import ru.market_gb.core.exceptions.InvalidParamsException;
 import ru.market_gb.core.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.exceptions.ServiceAppError;
 import ru.market_gb.core.services.OrderService;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -78,7 +71,7 @@ public class OrdersController {
     @GetMapping
     public List<OrderDto> getAllByUsername(@RequestHeader @Parameter(description = "Имя пользователя", required = true) String username) {
         return ordersService.findAllByUsername(username).stream()
-                .map(orderConverter::entityToDto).collect(Collectors.toList());
+                .map(orderConverter::entityToDto).toList();
     }
 
     @Operation(
