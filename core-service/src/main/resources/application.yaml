@@ -13,3 +13,15 @@ logging:
     root: INFO
     org.springframework.web: INFO
     org.hibernate: INFO
+integrations:
+  cart-service:
+    url: http://localhost:5555/cart
+    connect-timeout: 2000
+    read-timeout: 10000
+    write-timeout: 2000
+utils:
+  identity-map:
+    clear-cron: 0 0 0 * * *
+cartServiceIntegration:
+  clearUserCartUri: /api/v1/cart/0/clear
+  getUserCartUri: /api/v1/cart/0
