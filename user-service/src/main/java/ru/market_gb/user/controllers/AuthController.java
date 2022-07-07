@@ -1,5 +1,10 @@
 package ru.market_gb.user.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +23,22 @@ import ru.market_gb.user.utils.JwtTokenUtil;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "AuthController", description = "Методы авторизации")
 public class AuthController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
     //AuthenticationManager - часть Spring Security, умеет по логину и паролю проверять есть ли такой пользователь.
 
+    @Operation(
+            summary = "Запрос на получение токена",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ResponseEntity.class))
+                    )
+            }
+    )
     @PostMapping("/auth")
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest){
         try {
