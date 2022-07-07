@@ -13,7 +13,7 @@
     <modules>
         <module>gateway-service</module>
         <module>core-service</module>
-        <module>api</module>
+        <module>api-service</module>
     </modules>
 
     <properties>
