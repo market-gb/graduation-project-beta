@@ -6,7 +6,7 @@
     import ru.market_gb.cart.dto.ProductDto;
     import ru.market_gb.cart.exceptions.ResourceNotFoundException;
     import ru.market_gb.cart.integrations.ProductsServiceIntegration;
-    import ru.market_gb.cart.models.Cart;
+    import ru.market_gb.cart.entities.Cart;
 
     import java.util.HashMap;
     import java.util.Map;

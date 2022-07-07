@@ -1,4 +1,4 @@
-package ru.market_gb.cart.models;
+package ru.market_gb.cart.entities;
 
 import lombok.Data;
 import ru.market_gb.cart.dto.ProductDto;
