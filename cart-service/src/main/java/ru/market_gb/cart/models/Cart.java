@@ -1,6 +1,7 @@
 package ru.market_gb.cart.models;
 
 import lombok.Data;
+import ru.market_gb.cart.dto.ProductDto;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -3,6 +3,7 @@ package ru.market_gb.cart.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.market_gb.cart.dto.ProductDto;
 
 import java.math.BigDecimal;
 

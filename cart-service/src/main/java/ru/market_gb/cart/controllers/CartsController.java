@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.market_gb.cart.converters.CartConverter;
+import ru.market_gb.cart.dto.CartDto;
+import ru.market_gb.cart.dto.StringResponse;
 import ru.market_gb.cart.services.CartService;
 
 @RestController
