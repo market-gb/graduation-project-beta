@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:with="currentPage='Список покупок'">
+<head th:include="fragments/common-head">
+</head>
+<body class="content">
+<nav th:replace="fragments/nav-bar::nav-bar">
+</nav>
+<div class="container">
+    <h1 th:text="${order.orderStatus.getName() + ' менеджер ' + order.manager}">Список покупок</h1>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>id единицы заказа</td>
+            <td>Наименование товара</td>
+            <td>Количество</td>
+            <td>Статус</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="orderItem : ${orderItems}">
+            <td th:text="${orderItem.id}"></td>
+            <td th:text="${orderItem.product.title}"></td>
+            <td th:text="${orderItem.quantity}"></td>
+            <td><a th:href="@{${'/management/item/' + orderItem.id}}" th:text="${orderItem.storageStatus.getName()}"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

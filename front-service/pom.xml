@@ -13,6 +13,7 @@
     <artifactId>front-service</artifactId>
     <name>front</name>
     <version>0.0.1</version>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
