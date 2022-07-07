@@ -13,6 +13,7 @@
     <modules>
         <module>gateway-service</module>
         <module>core-service</module>
+        <module>user-service</module>
     </modules>
 
     <properties>
