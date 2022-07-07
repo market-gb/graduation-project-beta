@@ -1,7 +1,7 @@
 server:
   port: 8188
   servlet:
-    context-path: /beta-version
+    context-path: /market-gb-users
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
