@@ -15,6 +15,7 @@
         <module>gateway-service</module>
         <module>core-service</module>
         <module>cart-service</module>
+        <module>api-service</module>
         <module>front-service</module>
     </modules>
 
