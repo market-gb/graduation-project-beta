@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>ru.market-gb</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>api-service</artifactId>
             <version>0.0.2</version>
             <scope>compile</scope>
         </dependency>
