@@ -66,6 +66,28 @@ services:
         networks:
             - gb-net
 
+    spring_cart:
+        container_name: cart
+        build:
+            context: .
+            dockerfile: ./cart-service/Dockerfile
+        ports:
+            - 8166:8166
+        depends_on:
+            -   spring_core
+        networks:
+            - gb-net
+
+    spring_front:
+        container_name: front
+        build:
+            context: .
+            dockerfile: ./front-service/Dockerfile
+        ports:
+            - 3000:3000
+        networks:
+            - gb-net
+
 networks:
     gb-net:
         driver: bridge
