@@ -1,6 +1,8 @@
 package ru.market_gb.cart.converters;
 
 import org.springframework.stereotype.Component;
+import ru.market_gb.cart.dto.CartDto;
+import ru.market_gb.cart.dto.CartItemDto;
 import ru.market_gb.cart.models.Cart;
 
 import java.util.List;

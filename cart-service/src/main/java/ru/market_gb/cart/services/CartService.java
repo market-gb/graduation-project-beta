@@ -3,6 +3,7 @@
     import lombok.RequiredArgsConstructor;
     import org.springframework.beans.factory.annotation.Value;
     import org.springframework.stereotype.Service;
+    import ru.market_gb.cart.dto.ProductDto;
     import ru.market_gb.cart.exeptions.ResourceNotFoundException;
     import ru.market_gb.cart.integrations.ProductsServiceIntegration;
     import ru.market_gb.cart.models.Cart;
