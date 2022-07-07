@@ -12,7 +12,7 @@ import ru.market_gb.cart.dto.StringResponse;
 import ru.market_gb.cart.services.CartService;
 
 @RestController
-@RequestMapping("/api/v1/cart")
+@RequestMapping("/api/v1/carts")
 @RequiredArgsConstructor
 public class CartsController {
     private final CartService cartService;
