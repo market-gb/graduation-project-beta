@@ -8,12 +8,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import ru.market_gb.api.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.converters.ProductConverter;
 import ru.market_gb.api.dto.core.ProductDto;
 import ru.market_gb.core.entities.Product;
 import ru.market_gb.core.exceptions.CoreValidationException;
 import ru.market_gb.core.exceptions.InvalidParamsException;
-import ru.market_gb.core.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.repositories.ProductRepository;
 import ru.market_gb.core.repositories.specifications.ProductsSpecifications;
 
