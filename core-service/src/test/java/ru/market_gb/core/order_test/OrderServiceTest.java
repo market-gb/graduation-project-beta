@@ -7,9 +7,10 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.market_gb.core.dto.CartDto;
-import ru.market_gb.core.dto.CartItemDto;
-import ru.market_gb.core.dto.OrderDetailsDto;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
+import ru.market_gb.api.dto.cart.CartDto;
+import ru.market_gb.api.dto.cart.CartItemDto;
+import ru.market_gb.api.dto.core.OrderDetailsDto;
 import ru.market_gb.core.entities.Category;
 import ru.market_gb.core.entities.Order;
 import ru.market_gb.core.entities.OrderItem;
@@ -80,7 +81,7 @@ public class OrderServiceTest {
         order.setPhone(orderDetailsDto.getPhone());
         order.setUsername(USERNAME);
         order.setTotalPrice(cartDto.getTotalPrice());
-        order.setOrderStatus(Order.OrderStatus.CREATED);
+        order.setOrderStatus(OrderStatus.CREATED);
         Set<OrderItem> items = cartDto.getItems().stream()
                 .map(i -> {
                     OrderItem item = new OrderItem();
@@ -100,7 +101,7 @@ public class OrderServiceTest {
         Mockito.doReturn(cartDto).when(cartServiceIntegration).getUserCart(USERNAME);
         Mockito.doReturn(Optional.of(product)).when(productsService).findById(cartItemDto.getProductId());
         Order newOrder = ordersService.save(USERNAME, orderDetailsDto);
-        Assertions.assertEquals(Order.OrderStatus.CREATED, newOrder.getOrderStatus());
+        Assertions.assertEquals(OrderStatus.CREATED, newOrder.getOrderStatus());
         Assertions.assertEquals(cartDto.getTotalPrice(), newOrder.getTotalPrice());
         Assertions.assertEquals(cartDto.getItems().size(), newOrder.getItems().size());
         Mockito.verify(cartServiceIntegration, Mockito.times(1)).clearUserCart(USERNAME);
@@ -114,7 +115,7 @@ public class OrderServiceTest {
         List<Order> orders = ordersService.findAllByUsername(USERNAME);
         Assertions.assertEquals(1, orders.size());
         Assertions.assertEquals(USERNAME, orders.get(0).getUsername());
-        Assertions.assertEquals(Order.OrderStatus.CREATED, orders.get(0).getOrderStatus());
+        Assertions.assertEquals(OrderStatus.CREATED, orders.get(0).getOrderStatus());
         Assertions.assertEquals(ADDRESS, orders.get(0).getAddress());
         Assertions.assertEquals(PHONE, orders.get(0).getPhone());
         Assertions.assertEquals(TOTAL_PRICE, orders.get(0).getTotalPrice());
@@ -126,7 +127,7 @@ public class OrderServiceTest {
         Mockito.doReturn(Optional.of(order)).when(ordersRepository).findById(1L);
         Order currentOrder = ordersService.findById(1L).orElse(new Order());
         Assertions.assertEquals(1, currentOrder.getId());
-        Assertions.assertEquals(Order.OrderStatus.CREATED, currentOrder.getOrderStatus());
+        Assertions.assertEquals(OrderStatus.CREATED, currentOrder.getOrderStatus());
         Assertions.assertEquals(USERNAME, currentOrder.getUsername());
         Assertions.assertEquals(ADDRESS, currentOrder.getAddress());
         Assertions.assertEquals(PHONE, currentOrder.getPhone());
@@ -143,7 +144,7 @@ public class OrderServiceTest {
 
     @Test
     public void changeStatusTest() {
-        ordersService.changeStatus(Order.OrderStatus.PAID, 1L);
-        Mockito.verify(ordersRepository, Mockito.times(1)).changeStatus(Order.OrderStatus.PAID, 1L);
+        ordersService.changeStatus(OrderStatus.PAID, 1L);
+        Mockito.verify(ordersRepository, Mockito.times(1)).changeStatus(OrderStatus.PAID, 1L);
     }
 }

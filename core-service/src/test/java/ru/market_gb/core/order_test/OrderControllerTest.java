@@ -8,11 +8,12 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.*;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
 import ru.market_gb.core.controllers.OrdersController;
 import ru.market_gb.core.converters.OrderConverter;
-import ru.market_gb.core.dto.OrderDetailsDto;
-import ru.market_gb.core.dto.OrderDto;
-import ru.market_gb.core.dto.OrderItemDto;
+import ru.market_gb.api.dto.core.OrderDetailsDto;
+import ru.market_gb.api.dto.core.OrderDto;
+import ru.market_gb.api.dto.core.OrderItemDto;
 import ru.market_gb.core.entities.Category;
 import ru.market_gb.core.entities.Order;
 import ru.market_gb.core.entities.OrderItem;
@@ -74,7 +75,7 @@ public class OrderControllerTest {
         orderDto.setUsername(USERNAME);
         orderDto.setAddress(ADDRESS);
         orderDto.setPhone(PHONE);
-        orderDto.setOrderStatus(Order.OrderStatus.CREATED);
+        orderDto.setOrderStatus(OrderStatus.CREATED);
         orderDto.setItems(Set.of(orderItemDto));
 
         order = new Order();
@@ -83,7 +84,7 @@ public class OrderControllerTest {
         order.setTotalPrice(PRICE);
         order.setAddress(ADDRESS);
         order.setPhone(PHONE);
-        order.setOrderStatus(Order.OrderStatus.CREATED);
+        order.setOrderStatus(OrderStatus.CREATED);
 
         OrderItem orderItem = new OrderItem();
         orderItem.setId(1L);
@@ -139,7 +140,7 @@ public class OrderControllerTest {
         mvc.perform(put("/api/v1/orders/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper
-                                .writeValueAsString(Order.OrderStatus.PAID
+                                .writeValueAsString(OrderStatus.PAID
                                 )))
                 .andExpect(status().isOk());
     }

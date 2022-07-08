@@ -1,4 +1,4 @@
-package ru.market_gb.core.dto;
+package ru.market_gb.api.dto.core;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;

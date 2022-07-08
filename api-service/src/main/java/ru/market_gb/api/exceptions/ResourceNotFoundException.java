@@ -1,4 +1,4 @@
-package ru.market_gb.core.exceptions;
+package ru.market_gb.api.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {
