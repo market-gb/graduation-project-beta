@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import ru.market_gb.core.dto.CartDto;
+import ru.market_gb.api.dto.cart.CartDto;
 import ru.market_gb.core.exceptions.CartServiceIntegrationException;
-import ru.market_gb.core.exceptions.ServiceAppError;
+import ru.market_gb.core.exceptions.CoreAppError;
 
 @Slf4j
 @Component
@@ -39,13 +39,13 @@ public class CartServiceIntegration {
                 .retrieve()
                 .onStatus(
                         HttpStatus::is4xxClientError,
-                        clientResponse -> clientResponse.bodyToMono(ServiceAppError.class).map(
+                        clientResponse -> clientResponse.bodyToMono(CoreAppError.class).map(
                                 body -> {
-                                    if (body.getCode().equals(ServiceAppError.ServiceErrors.CART_NOT_FOUND)) {
+                                    if (body.getCode().equals(CoreAppError.ServiceErrors.CART_NOT_FOUND)) {
                                         log.error("Выполнен некорректный запрос к сервису корзин: корзина не найдена");
                                         return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина не найдена");
                                     }
-                                    if (body.getCode().equals(ServiceAppError.ServiceErrors.CART_SERVICE_IS_BROKEN)) {
+                                    if (body.getCode().equals(CoreAppError.ServiceErrors.CART_SERVICE_IS_BROKEN)) {
                                         log.error("Выполнен некорректный запрос к сервису корзин: корзина сломана");
                                         return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина сломана");
                                     }

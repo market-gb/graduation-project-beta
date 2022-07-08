@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
 import ru.market_gb.core.entities.Order;
 
 import java.util.List;
@@ -15,5 +16,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Modifying
     @Query("update Order o set o.orderStatus = ?1, o.updatedAt = CURRENT_TIMESTAMP where o.id = ?2")
-    void changeStatus(Order.OrderStatus orderStatus, Long orderId);
+    void changeStatus(OrderStatus orderStatus, Long orderId);
 }

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
 import ru.market_gb.core.entities.Order;
 import ru.market_gb.core.repositories.OrderRepository;
 
@@ -30,7 +31,7 @@ public class OrderRepositoryTest {
         order.setUsername(USERNAME);
         order.setAddress(ADDRESS);
         order.setPhone(PHONE);
-        order.setOrderStatus(Order.OrderStatus.CREATED);
+        order.setOrderStatus(OrderStatus.CREATED);
         order.setTotalPrice(TOTAL_PRICE);
         order.setItems(Set.of());
         entityManager.persist(order);
@@ -39,16 +40,16 @@ public class OrderRepositoryTest {
 
     @Test
     public void changeOrderStatusTest() {
-        orderRepository.changeStatus(Order.OrderStatus.PAID, 1L);
+        orderRepository.changeStatus(OrderStatus.PAID, 1L);
         Order order = orderRepository.findById(1L).orElse(new Order());
-        Assertions.assertEquals(Order.OrderStatus.PAID, order.getOrderStatus());
+        Assertions.assertEquals(OrderStatus.PAID, order.getOrderStatus());
     }
 
     @Test
     public void findAllByUsernameTest() {
         List<Order> orderList = orderRepository.findAllByUsername(USERNAME);
         Assertions.assertEquals(2, orderList.size());
-        Assertions.assertEquals(Order.OrderStatus.CREATED, orderList.get(0).getOrderStatus());
+        Assertions.assertEquals(OrderStatus.CREATED, orderList.get(0).getOrderStatus());
         Assertions.assertEquals(USERNAME, orderList.get(0).getUsername());
         Assertions.assertEquals(USERNAME, orderList.get(1).getUsername());
     }

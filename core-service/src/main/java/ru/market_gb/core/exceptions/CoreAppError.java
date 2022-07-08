@@ -4,13 +4,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.validation.ObjectError;
+import ru.market_gb.api.exceptions.AppError;
 
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
 @Schema(description = "Ошибки основного сервиса")
-public class ServiceAppError {
+public class CoreAppError extends AppError {
     @Schema(description = "Коды ошибок сервиса", example = "PRODUCT_NOT_FOUND")
     private final Enum<?> code;
     @Schema(description = "Сообщения ошибок сервиса", example = "Продукт не найден")
@@ -24,7 +25,7 @@ public class ServiceAppError {
         CART_NOT_FOUND, CART_SERVICE_IS_BROKEN
     }
 
-    public ServiceAppError(Enum<?> code, String message) {
+    public CoreAppError(Enum<?> code, String message) {
         this.code = code;
         this.message = message;
     }

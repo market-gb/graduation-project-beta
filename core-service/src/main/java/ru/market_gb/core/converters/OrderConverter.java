@@ -2,7 +2,7 @@ package ru.market_gb.core.converters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.market_gb.core.dto.OrderDto;
+import ru.market_gb.api.dto.core.OrderDto;
 import ru.market_gb.core.entities.Order;
 
 @Component

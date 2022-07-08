@@ -4,27 +4,28 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import ru.market_gb.api.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler
-    public ResponseEntity<ServiceAppError> catchResourceNotFoundException(ResourceNotFoundException e) {
-        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.PRODUCT_NOT_FOUND, e.getMessage()), HttpStatus.NOT_FOUND);
+    public ResponseEntity<CoreAppError> catchResourceNotFoundException(ResourceNotFoundException e) {
+        return new ResponseEntity<>(new CoreAppError(CoreAppError.ServiceErrors.PRODUCT_NOT_FOUND, e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler
-    public ResponseEntity<ServiceAppError> catchInvalidParamsException(InvalidParamsException e) {
-        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.INVALID_PARAMS, e.getMessage()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<CoreAppError> catchInvalidParamsException(InvalidParamsException e) {
+        return new ResponseEntity<>(new CoreAppError(CoreAppError.ServiceErrors.INVALID_PARAMS, e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public ResponseEntity<ServiceAppError> catchValidationException(CoreValidationException e) {
-        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.VALIDATION_ERRORS, e.getMessage(), e.getErrors()), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<CoreAppError> catchValidationException(CoreValidationException e) {
+        return new ResponseEntity<>(new CoreAppError(CoreAppError.ServiceErrors.VALIDATION_ERRORS, e.getMessage(), e.getErrors()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler
-    public ResponseEntity<ServiceAppError> catchCartServiceIntegrationException(CartServiceIntegrationException e) {
-        return new ResponseEntity<>(new ServiceAppError(ServiceAppError.ServiceErrors.CART_SERVICE_IS_BROKEN, e.getMessage()), HttpStatus.NOT_FOUND);
+    public ResponseEntity<CoreAppError> catchCartServiceIntegrationException(CartServiceIntegrationException e) {
+        return new ResponseEntity<>(new CoreAppError(CoreAppError.ServiceErrors.CART_SERVICE_IS_BROKEN, e.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

@@ -3,6 +3,7 @@ package ru.market_gb.core.entities;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -49,8 +50,4 @@ public class Order {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    public enum OrderStatus {
-        CREATED, PAID, NOT_PAID
-    }
 }
