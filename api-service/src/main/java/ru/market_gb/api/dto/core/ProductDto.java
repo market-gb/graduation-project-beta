@@ -1,4 +1,4 @@
-package ru.market_gb.core.dto;
+package ru.market_gb.api.dto.core;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -21,7 +21,7 @@ public class ProductDto {
     private String title;
     @NotNull(message = "Поле цены товара не должно быть пустым")
     @DecimalMin(value = "0.0", inclusive = false)
-    @Digits(integer=10, fraction=2)
+    @Digits(integer = 10, fraction = 2)
     @Schema(description = "Цена товара", required = true, example = "500.00")
     private BigDecimal price;
     @NotNull(message = "Должна быть указана хотя бы одна категория")

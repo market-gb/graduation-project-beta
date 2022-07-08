@@ -3,11 +3,11 @@ package ru.market_gb.core.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.market_gb.core.dto.CartDto;
-import ru.market_gb.core.dto.OrderDetailsDto;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
+import ru.market_gb.api.dto.cart.CartDto;
+import ru.market_gb.api.dto.core.OrderDetailsDto;
 import ru.market_gb.core.entities.Order;
 import ru.market_gb.core.entities.OrderItem;
-import ru.market_gb.core.exceptions.CoreValidationException;
 import ru.market_gb.core.exceptions.InvalidParamsException;
 import ru.market_gb.core.exceptions.ResourceNotFoundException;
 import ru.market_gb.core.integrations.CartServiceIntegration;
@@ -27,7 +27,7 @@ public class OrderService {
 
     @Transactional
     public Order save(String username, OrderDetailsDto orderDetailsDto) {
-        if (username == null || orderDetailsDto == null){
+        if (username == null || orderDetailsDto == null) {
             throw new InvalidParamsException("Невалидные параметры");
         }
         CartDto currentCart = cartServiceIntegration.getUserCart(username);
@@ -36,7 +36,7 @@ public class OrderService {
         order.setPhone(orderDetailsDto.getPhone());
         order.setUsername(username);
         order.setTotalPrice(currentCart.getTotalPrice());
-        order.setOrderStatus(Order.OrderStatus.CREATED);
+        order.setOrderStatus(OrderStatus.CREATED);
         Set<OrderItem> items = currentCart.getItems().stream()
                 .map(i -> {
                     OrderItem item = new OrderItem();
@@ -55,7 +55,7 @@ public class OrderService {
     }
 
     public List<Order> findAllByUsername(String username) {
-        if (username == null){
+        if (username == null) {
             throw new InvalidParamsException("Невалидные параметры");
         }
         return ordersRepository.findAllByUsername(username);
@@ -80,8 +80,8 @@ public class OrderService {
     }
 
     @Transactional
-    public void changeStatus(Order.OrderStatus orderStatus, Long id) {
-        if (orderStatus == null || id == null){
+    public void changeStatus(OrderStatus orderStatus, Long id) {
+        if (orderStatus == null || id == null) {
             throw new InvalidParamsException("Невалидные параметры");
         }
         try {

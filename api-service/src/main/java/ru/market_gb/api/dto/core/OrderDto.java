@@ -1,8 +1,8 @@
-package ru.market_gb.core.dto;
+package ru.market_gb.api.dto.core;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
-import ru.market_gb.core.entities.Order;
+import ru.market_gb.api.dto.core.enums.OrderStatus;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -26,5 +26,5 @@ public class OrderDto {
     @Schema(description = "Телефон получателя", required = true, example = "222-22-22")
     private String phone;
     @Schema(description = "Статус заказа", required = true, example = "CREATED")
-    private Order.OrderStatus orderStatus;
+    private OrderStatus orderStatus;
 }
