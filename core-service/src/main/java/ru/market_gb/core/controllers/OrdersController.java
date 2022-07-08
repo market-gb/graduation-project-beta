@@ -18,7 +18,7 @@ import ru.market_gb.core.converters.OrderConverter;
 import ru.market_gb.api.dto.core.OrderDetailsDto;
 import ru.market_gb.api.dto.core.OrderDto;
 import ru.market_gb.core.exceptions.CoreValidationException;
-import ru.market_gb.core.exceptions.ServiceAppError;
+import ru.market_gb.core.exceptions.CoreAppError;
 import ru.market_gb.core.services.OrderService;
 
 import javax.validation.Valid;
@@ -42,7 +42,7 @@ public class OrdersController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "4XX",
-                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = CoreAppError.class))
                     )
             }
     )
@@ -66,7 +66,7 @@ public class OrdersController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "4XX",
-                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = CoreAppError.class))
                     )
             }
     )
@@ -98,7 +98,7 @@ public class OrdersController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "4XX",
-                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = CoreAppError.class))
                     )
             }
     )
@@ -116,7 +116,7 @@ public class OrdersController {
                     ),
                     @ApiResponse(
                             description = "Ошибка", responseCode = "400",
-                            content = @Content(schema = @Schema(implementation = ServiceAppError.class))
+                            content = @Content(schema = @Schema(implementation = CoreAppError.class))
                     )
             }
     )
