@@ -1,4 +1,4 @@
-package ru.market_gb.cart.dto;
+package ru.market_gb.api.dto;
 
 public class StringResponse {
     private String value;
